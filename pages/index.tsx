@@ -1,10 +1,35 @@
-import Image from 'next/image'
-import { Inter } from 'next/font/google'
+import Billboard from '@/components/Billboard'
+import MovieList from '@/components/MovieList'
+import Navbar from '@/components/Navbar'
+import useMovieList from '@/hooks/useMovieList'
+import { NextPageContext } from 'next'
+import { getSession } from 'next-auth/react'
 
-const inter = Inter({ subsets: ['latin'] })
+export async function getServerSideProps(context: NextPageContext) {
+  const session = await getSession(context)
+
+  if (!session) {
+    return {
+      redirect: {
+        destination: '/auth',
+        permanent: false,
+      },
+    }
+  }
+  return {
+    props: {},
+  }
+}
 
 export default function Home() {
+  const { data: movies = [] } = useMovieList()
   return (
-    <h1 className='text-2xl text-green-600'>Netflix Clone</h1>
+    <>
+      <Navbar />
+      <Billboard />
+      <div className="pb-40">
+        <MovieList title="Trending Now" data={movies} />
+      </div>
+    </>
   )
 }
