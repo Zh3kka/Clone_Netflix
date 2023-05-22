@@ -20,11 +20,6 @@ export default NextAuth({
       clientId: process.env.GOOGLE_CLIENT_ID || '',
       clientSecret: process.env.GOOGLE_CLIENT_SECRET || '',
     }),
-    VkProvider({
-      clientId: process.env.VK_CLIENT_ID || '',
-      clientSecret: process.env.VK_CLIENT_SECRET || '',
-    }),
-
     Credentials({
       id: 'credentials',
       name: 'Credentials',

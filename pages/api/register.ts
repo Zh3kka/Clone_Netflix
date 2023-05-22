@@ -16,10 +16,10 @@ export default async function handler(
     if (existingUser) {
       return res.status(422).json({ error: 'Email taken' })
     }
-    const hashedPassword = await bcrypt.hash(password, 12)
-    if (hashedPassword.length <= 6) {
+    if (password.length < 6) {
       return res.status(422).json({ error: 'Password too short' })
     }
+    const hashedPassword = await bcrypt.hash(password, 12)
     const user = await prismadb.user.create({
       data: {
         email,

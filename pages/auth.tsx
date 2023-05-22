@@ -5,7 +5,6 @@ import { signIn } from 'next-auth/react'
 
 import { FcGoogle } from 'react-icons/fc'
 import { FaGithub } from 'react-icons/fa'
-import { SlSocialVkontakte } from 'react-icons/sl'
 
 const Auth = () => {
   const [email, setEmail] = useState('')
@@ -90,7 +89,7 @@ const Auth = () => {
             </button>
             <div className="flex flex-row items-center gap-4 mt-8 justify-center">
               <div
-                onClick={() => signIn('google', { callbackUrl: '/' })}
+                onClick={() => signIn('google', { callbackUrl: '/profiles' })}
                 className="
                   w-10
                   h-10
@@ -107,7 +106,7 @@ const Auth = () => {
                 <FcGoogle size={30} />
               </div>
               <div
-                onClick={() => signIn('github', { callbackUrl: '/' })}
+                onClick={() => signIn('github', { callbackUrl: '/profiles' })}
                 className="
                   w-10
                   h-10
@@ -122,23 +121,6 @@ const Auth = () => {
                 "
               >
                 <FaGithub size={30} />
-              </div>
-              <div
-                onClick={() => signIn('vk', { callbackUrl: '/' })}
-                className="
-                  w-10
-                  h-10
-                  bg-white
-                  rounded-full
-                  flex
-                  items-center
-                  justify-center
-                  cursor-pointer
-                  hover:opacity-80
-                  transition
-                "
-              >
-                <SlSocialVkontakte size={30} />
               </div>
             </div>
             <p className="text-neutral-500 mt-12">
