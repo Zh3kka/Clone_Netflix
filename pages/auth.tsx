@@ -10,7 +10,7 @@ const Auth = () => {
   const [email, setEmail] = useState('')
   const [name, setName] = useState('')
   const [password, setPassword] = useState('')
-
+  const [passwordError, setPasswordError] = useState('')
   const [variant, setVariant] = useState('login')
 
   const toggleVariant = useCallback(() => {
@@ -33,6 +33,10 @@ const Auth = () => {
 
   const register = useCallback(async () => {
     try {
+      if (password.length < 6) {
+        setPasswordError('Password must be at least 6 characters long')
+        return
+      }
       await axios.post('/api/register', {
         email,
         name,
@@ -75,11 +79,15 @@ const Auth = () => {
               />
               <Input
                 label="Password"
-                onChange={(ev: any) => setPassword(ev.target.value)}
+                onChange={(ev: any) => {
+                  setPassword(ev.target.value)
+                  setPasswordError('')
+                }}
                 id="password"
                 type="password"
                 value={password}
               />
+              {passwordError && <p className="text-red-500">{passwordError}</p>}
             </div>
             <button
               onClick={variant === 'login' ? login : register}
