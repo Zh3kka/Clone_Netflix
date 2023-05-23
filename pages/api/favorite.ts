@@ -12,13 +12,13 @@ export default async function handler(
     if (req.method === 'POST') {
       const { currentUser } = await serverAuth(req)
       const { movieId } = req.body
-      const exisitingMovie = await prismadb.movie.findUnique({
+      const existingMovie = await prismadb.movie.findUnique({
         where: {
           id: movieId,
         },
       })
 
-      if (!exisitingMovie) {
+      if (!existingMovie) {
         throw new Error('Invalid ID')
       }
 
@@ -39,12 +39,12 @@ export default async function handler(
     if (req.method === 'DELETE') {
       const { currentUser } = await serverAuth(req)
       const { movieId } = req.body
-      const exisitingMovie = await prismadb.movie.findUnique({
+      const existingMovie = await prismadb.movie.findUnique({
         where: {
           id: movieId,
         },
       })
-      if (!exisitingMovie) {
+      if (!existingMovie) {
         throw new Error('Invalid ID')
       }
       const updatedFavorites = without(currentUser.favoriteIds, movieId)

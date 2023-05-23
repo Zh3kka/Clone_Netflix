@@ -6,7 +6,6 @@ import { compare } from 'bcrypt'
 
 import GithubProvider from 'next-auth/providers/github'
 import GoogleProvider from 'next-auth/providers/google'
-import VkProvider from 'next-auth/providers/vk'
 
 import { PrismaAdapter } from '@next-auth/prisma-adapter'
 
@@ -20,6 +19,7 @@ export default NextAuth({
       clientId: process.env.GOOGLE_CLIENT_ID || '',
       clientSecret: process.env.GOOGLE_CLIENT_SECRET || '',
     }),
+
     Credentials({
       id: 'credentials',
       name: 'Credentials',
